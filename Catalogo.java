@@ -63,6 +63,39 @@ public class Catalogo {
         System.out.println("No se encontró la película.");
     }
 
+    /**
+     * Elimina la película en la posición indicada (1 a total) y desplaza
+     * las siguientes una posición a la izquierda en todos los arrays.
+     * Devuelve el título eliminado, o null si la posición no es válida.
+     */
+    public String eliminar(int posicion) {
+        if (posicion < 1 || posicion > total) {
+            return null;
+        }
+        int indice = posicion - 1;
+        String eliminada = titulos[indice];
+
+        for (int i = indice; i < total - 1; i++) {
+            titulos[i] = titulos[i + 1];
+            directores[i] = directores[i + 1];
+            generos[i] = generos[i + 1];
+            anios[i] = anios[i + 1];
+            calificaciones[i] = calificaciones[i + 1];
+        }
+
+        total--;
+        titulos[total] = null;
+        directores[total] = null;
+        generos[total] = null;
+        anios[total] = 0;
+        calificaciones[total] = 0;
+        return eliminada;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
     private void imprimirDatos(int i) {
         System.out.println("Título: " + titulos[i]);
         System.out.println("Director: " + directores[i]);
