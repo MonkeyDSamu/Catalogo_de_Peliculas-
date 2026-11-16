@@ -14,6 +14,7 @@ public class Main {
                 case 1 -> agregarPelicula();
                 case 2 -> catalogo.mostrarTodas();
                 case 3 -> buscarPelicula();
+                case 4 -> eliminarPelicula();
                 case 0 -> System.out.println("¡Hasta pronto!");
                 default -> System.out.println("Opción no válida. Intente de nuevo.");
             }
@@ -26,6 +27,7 @@ public class Main {
         System.out.println("1. Agregar película");
         System.out.println("2. Mostrar películas");
         System.out.println("3. Buscar película");
+        System.out.println("4. Eliminar película");
         System.out.println("0. Salir");
         System.out.print("Seleccione una opción: ");
     }
@@ -57,6 +59,40 @@ public class Main {
     private static void buscarPelicula() {
         String titulo = leerTexto("Ingrese el título de la película: ");
         catalogo.buscarPorTitulo(titulo);
+    }
+
+    private static void eliminarPelicula() {
+        if (catalogo.estaVacio()) {
+            System.out.println("No hay películas para eliminar.");
+            return;
+        }
+
+        catalogo.mostrarTodas();
+        System.out.print("Ingrese el número de la película a eliminar: ");
+        int numero;
+        try {
+            numero = Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: debe ingresar un número.");
+            return;
+        }
+
+        if (numero < 1 || numero > catalogo.getTotal()) {
+            System.out.println("La película no existe.");
+            return;
+        }
+
+        System.out.print("¿Está seguro de eliminarla? (si/no): ");
+        String confirmar = scanner.nextLine().trim();
+
+        if (confirmar.equalsIgnoreCase("si") || confirmar.equalsIgnoreCase("sí")) {
+            String eliminada = catalogo.eliminar(numero);
+            System.out.println("Película eliminada: " + eliminada);
+        } else if (confirmar.equalsIgnoreCase("no")) {
+            System.out.println("Eliminación cancelada.");
+        } else {
+            System.out.println("Respuesta incorrecta.");
+        }
     }
 
     private static String leerTexto(String mensaje) {
