@@ -60,7 +60,7 @@ Se trabaja con un modelo GitFlow simplificado, con estas ramas:
    git push -u origin feature/nombre-de-la-funcionalidad
    ```
 6. En GitHub, abrir un **Pull Request** con base `develop` y comparar con la rama `feature/...`. Describir qué se hizo.
-7. Luego de creado el **Pull Request** haces merge del **Pull Request** y los cambios estarán en la rama develop.
+7. Luego de creado el **Pull Request**, haces merge del **Pull Request** y los cambios estarán en la rama `develop`.
 8. Limpiar y actualizar el repositorio local:
    ```bash
    git checkout develop
