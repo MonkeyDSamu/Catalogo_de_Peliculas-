@@ -1,28 +1,10 @@
 import java.util.Scanner;
 
 /**
- * Catalogo de Peliculas - Integrante 3
- * Busqueda y modificacion de peliculas (UPDATE).
- *
  * @author Samu
- *
- * Los metodos reciben los arrays donde se guardan las peliculas
- * (titulos, directores, generos, anios) y la cantidad de peliculas registradas.
- *
- * Ejemplo de uso desde el menu (switch):
- *   case 3:
- *       BusquedaModificacion.buscarPelicula(sc, titulos, directores, generos, anios, cantidad);
- *       break;
- *   case 4:
- *       BusquedaModificacion.modificarPelicula(sc, titulos, directores, generos, anios, cantidad);
- *       break;
  */
 public class BusquedaModificacion {
 
-    /**
-     * Compara el titulo buscado con los titulos guardados (sin importar
-     * mayusculas o minusculas). Devuelve la posicion o -1 si no existe.
-     */
     public static int buscarPosicion(String[] titulos, int cantidad, String tituloBuscado) {
         for (int i = 0; i < cantidad; i++) {
             if (titulos[i].equalsIgnoreCase(tituloBuscado.trim())) {
@@ -32,23 +14,16 @@ public class BusquedaModificacion {
         return -1;
     }
 
-    /**
-     * Muestra los datos de la pelicula que esta en la posicion indicada.
-     */
     public static void mostrarPelicula(int pos, String[] titulos, String[] directores,
-                                       String[] generos, int[] anios) {
+                                       String[] generos, int[] years) {
         System.out.println("Titulo:   " + titulos[pos]);
         System.out.println("Director: " + directores[pos]);
         System.out.println("Genero:   " + generos[pos]);
-        System.out.println("Anio:     " + anios[pos]);
+        System.out.println("Year:     " + years[pos]);
     }
 
-    /**
-     * Busca una pelicula por titulo y muestra sus datos.
-     * Si no existe, muestra un mensaje.
-     */
     public static void buscarPelicula(Scanner sc, String[] titulos, String[] directores,
-                                      String[] generos, int[] anios, int cantidad) {
+                                      String[] generos, int[] years, int cantidad) {
         System.out.println("\n--- Buscar pelicula ---");
 
         if (cantidad == 0) {
@@ -65,16 +40,12 @@ public class BusquedaModificacion {
             System.out.println("La pelicula \"" + tituloBuscado + "\" no existe en el catalogo.");
         } else {
             System.out.println("Pelicula encontrada:");
-            mostrarPelicula(pos, titulos, directores, generos, anios);
+            mostrarPelicula(pos, titulos, directores, generos, years);
         }
     }
 
-    /**
-     * Busca una pelicula por titulo y permite modificar sus datos.
-     * Si el usuario deja un campo vacio, se conserva el valor actual.
-     */
     public static void modificarPelicula(Scanner sc, String[] titulos, String[] directores,
-                                         String[] generos, int[] anios, int cantidad) {
+                                         String[] generos, int[] years, int cantidad) {
         System.out.println("\n--- Modificar pelicula ---");
 
         if (cantidad == 0) {
@@ -93,7 +64,7 @@ public class BusquedaModificacion {
         }
 
         System.out.println("Datos actuales:");
-        mostrarPelicula(pos, titulos, directores, generos, anios);
+        mostrarPelicula(pos, titulos, directores, generos, years);
         System.out.println("(Deje vacio y presione Enter para conservar el valor actual)");
 
         System.out.print("Nuevo titulo: ");
@@ -115,16 +86,16 @@ public class BusquedaModificacion {
         }
 
         System.out.print("New year: ");
-        String nuevoAnio = sc.nextLine().trim();
-        if (!nuevoAnio.isEmpty()) {
+        String newYear = sc.nextLine().trim();
+        if (!newYear.isEmpty()) {
             try {
-                anios[pos] = Integer.parseInt(nuevoAnio);
+                years[pos] = Integer.parseInt(newYear);
             } catch (NumberFormatException e) {
-                System.out.println("Anio no valido, se conserva el anterior.");
+                System.out.println("Year no valido, se conserva el anterior.");
             }
         }
 
         System.out.println("Pelicula modificada correctamente:");
-        mostrarPelicula(pos, titulos, directores, generos, anios);
+        mostrarPelicula(pos, titulos, directores, generos, years);
     }
 }
